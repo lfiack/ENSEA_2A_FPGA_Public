@@ -236,5 +236,139 @@ Dans cet exercice, votre ALU permettra d'effectuer 8 opérations :
 4. FSM
 
 ## Séance 3 : Contrôleur HDMI
-1. Generic
-2. 
+
+Le contrôleur HDMI a deux rôles :
+* Générer les signaux de contrôle pour le composant ```ADV7513``` présent sur la DE10-Nano,
+* Fournir une adresse au circuit responsable de générer les pixels.
+
+### Entity
+
+Le contrôleur HDMI doit être configurable pour s'adapter à différentes résolutions.
+Il doit donc disposer d'un certain nombre de paramètres ```generic``` :
+* La résolution ```h_res``` et ```v_res```,
+* Les timings spécifiques requis par le ```ADV7513```.
+
+Voici leur valeurs pour une résolution de 480p (720x480) :
+
+| param  | value |
+|:------:|:-----:|
+| h_res  | 720   |
+| v_res  | 480   |
+| h_sync | 61    |
+| h_fp   | 58    |
+| h_bp   | 18    |
+| v_sync | 5     |
+| v_fp   | 30    |
+| v_bp   | 9     |
+
+1. Créez un fichier ```hdmi_controler.vhd```
+2. Écrivez la partie ```generic``` de son ```entity```
+
+> Les paramètres peuvent être de type ```positive```
+
+Concernant les signaux d'entrée/sorties, ils sont de trois types :
+* Horloge et reset :
+    * i_clk
+    * i_rst_n
+* Signaux de contrôle du composant ```ADV7513``` :
+    * o_hdmi_hs
+    * o_hdmi_vs
+    * o_hdmi_de
+* Signaux à destination du circuit générant les pixels :
+	* o_pixel_en
+	* o_pixel_address
+	* o_x_counter
+	* o_y_counter
+
+> Les signaux d'adresse et de compteurs horizontaux et verticaux peuvent être de type ```natural```
+
+3. Écrivez la partie ```port``` de l'```entity```
+
+### Synchro horizontale
+
+1. Créez trois constantes :
+    * h_start : h_sync + h_fp
+    * h_end : h_start + h_res
+    * h_total : h_end + h_bp
+2. Que représentent chacune de ces constantes ?
+3. Créez deux registres internes :
+    * r_h_count : pour compter la _totalité_ des pixels (actifs et non-actifs)
+    * r_h_active : indique si les pixels sont actifs ou non.
+4. Créez un process sensible aux signaux d'horloge et de reset.
+5. Lors d'un reset, initialisez le signaux suivants :
+    * r_h_count à 0,
+    * o_hdmi_hs à '1',
+    * r_h_active à '0',
+
+Le reste du process sera consacré à l'écriture de trois registres : 
+* r_h_count,
+* o_hdmi_hs,
+* r_h_active,
+
+6. Écrivez le code du compteur ```r_h_count```. Il devra compter de 0 à ```h_total```.
+
+> Le code doit se situer dans le process, lors d'un front montant d'horloge
+
+7. Écrivez le code du registre ```o_hdmi_hs```. Il doit valoir '1' si ```r_h_count >= h_sync``` et que ```r_h_count /= h_total```.
+
+> Ce registre est décrit dans le même process et dans la même condition d'horloge que le registre précédent
+
+8. Écrivez le code du registre ```r_h_active```. Il passe à '1' lorsque ```r_h_count = h_start``` et passe à '0' lorsque ```h_count = h_end```.
+
+> Ce registre est décrit au même endroit que les deux précédents.
+
+9. Écrivez un testbench et simulez dans Modelsim.
+
+Le signaux ```o_hdmi_hs``` et ```r_h_active``` devraient ressembler à ça :
+
+![alt text](figures/sim_o_hdmi_hs.png)
+![alt text](figures/sim_r_h_active.png)
+
+### Synchro verticale
+
+La structure responsable de la synchronisation verticale est très proche de la synchronisation horizontale. La principale différence réside dans le fait que le compteur n'est autorisé à changer de valeur que lorsque le compteur horizontal termine sa ligne (```h_count = h_total```).
+
+1. En vous inspirant de la synchro horizontale, créez trois constantes :
+	* ```v_start```
+	* ```v_end```
+	* ```v_total```
+2. Créez deux registres internes :
+    * ```r_v_count```
+    * ```r_v_active```
+3. Créez un process sensible aux signaux d'horloge et de reset.
+4. Écrivez les initialisation du reset.
+5. Écrivez le code du compteur de 0 à ```v_total```.
+6. Écrivez le code du signal de sortie ```o_hdmi_vs```.
+7. Écrivez le code du registre ```r_h_active```.
+8. Faites évoluer votre testbench et simulez dans Modelsim.
+
+Le signaux ```r_v_count```, ```o_hdmi_vs``` et ```r_v_active``` devraient ressembler à ça :
+
+![alt text](figures/sim_r_v_count.png)
+![alt text](figures/sim_o_hdmi_vs.png)
+![alt text](figures/sim_r_v_active.png)
+
+### Data Enable : Pixels actifs
+
+Cette partie est plus simple, vous allez décrire le registre de sortie ```o_hdmi_de```.
+
+1. Créez un nouveau process sensible sur l'horloge et le reset.
+2. En cas de reset, la sortie ```o_hdmi_de``` prend la valeur '0'.
+3. En cas de front montant : ```o_hdmi_de <= r_v_active and r_h_active;```
+
+### Générateur d'adresse et de coordonnées
+
+1. Écrivez le code permettant de générer le signal ```o_pixel_en```
+
+> Il doit valoir '1' r_v_active et r_h_active sont à '1'
+
+2. Écrivez le code permettant de générer les signaux ```o_x_counter```, ```o_y_counter```.
+
+> Ces signaux représentent les pixels **actifs**. (0,0) est le premier pixel en haut à gauche.
+
+3. Écrivez le code du signal ```o_pixel_address```
+
+> Ce signal évolue de 0 à (h_res * v_res) - 1 lorsque les pixels sont actifs. Ici, le pixel 0 est le premier pixel de la première ligne, 720 pour le premier pixel de la deuxième ligne, 1440 pour la troisième, etc.
+
+### Analyse
+1. Tracer le schéma d'architecture du système complet
