@@ -1,6 +1,6 @@
 # ENSEA 2A FPGA
 
-> **Attention**, work in progress !
+> **Attention**, version 0, 16/06/2025, je suis preneur pour toute amélioration
 
 ## Travaux dirigés
 
