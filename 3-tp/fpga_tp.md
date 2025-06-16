@@ -261,32 +261,105 @@ Vous aurez besoin d'une structure de ce type pour détecter les fronts montants 
 
 ![alt text](figures/edge_detector.png)
 
-1. À l'aide du schéma ci-dessus, expliquez comment un front montant ou descendant peut être détecté
-2. Implémenter la solution en VHDL
-3. Simuler cette solution
-4. Tester sur la carte
+1. À partir d'ici, vous travaillerez dans le projet fourni par [ce lien](telecran.zip).
+2. À l'aide du schéma ci-dessus, expliquez comment un front montant ou descendant peut être détecté.
+
+> Vous aurez besoin de faire évoluer cette structure, notamment en prenant en compte la voie B, pour prendre en compte les deux sens de rotation
+
+3. Implémenter la solution en VHDL.
+4. Simuler cette solution.
+5. Tester sur la carte.
+6. Montrez à l'enseignant.
+
+### Comment visualiser la sortie HDMI ?
+
+Vous n'allez pas passer votre temps à débrancher votre écran.
+Les salles de TP sont équipées d'adaptateurs HDMI vers USB.
+
+![alt text](figures/adapter.png)
+
+1. Branchez le cable HDMI à votre carte et à l'adaptateur. Branchez le port USB à l'ordinateur.
+2. Lancez le logiciel VLC.
+3. Ouvrir un nouveau ```capture device```.
+
+> Media > Open Capture Device
+
+4. Ajoutez l'adaptateur dans ```Video device name```.
 
 ### Contrôleur HDMI
 
-* Vérifier les signaux en simu vis à vis d'un cahier des charges bien écrit ```TODO```
-* Le contrôleur génère une adresse et une paire de signaux (X,Y)
-* On peut faire un test sur la carte en connectant les signaux (X,Y) sur le RGB des pixels
+Cette partie du projet consiste à mettre en oeuvre le contrôleur HDMI conçu en TD.
+
+1. Si ce n'est pas fait, finissez le TD 3. Simulez le composant.
+
+> Les timings doivent être rigoureusement identiques aux captures d'écran du TD.
+
+2. Ajoutez le fichier ```hdmi_controler.vhd``` au projet.
+3. Instanciez le composant ```hdmi_controler``` dans votre fichier top (```telecran.vhd```).
+
+> Utilisez l'horloge et le reset produis par la PLL
+> ```vhdl
+> i_clk => s_clk_27,
+> i_rst_n => s_rst_n,
+> ```
+> 
+> Certains signaux ne sont pas utilisés ici
+> ```vhdl
+> o_pixel_en => open,
+> o_pixel_address => open,
+> ```
+
+4. Connectez les sorties pixel (signal ```o_hdmi_tx_d```) aux compteurs x, y.
+
+> Par exemple :
+> ```vhdl
+> o_hdmi_tx_d(23 downto 16) <= std_logic_vector(to_unsigned(s_x_counter, 8));
+> o_hdmi_tx_d(15 downto 8) <= std_logic_vector(to_unsigned(s_y_counter, 8));
+> o_hdmi_tx_d(7 downto 0) <= (others => '0');
+> ```
+
+5. À quels bits correspondent chaque composante couleur ?
+
+6. Compilez et testez.
+
+7. Montrez à l'enseignant.
 
 ### Déplacement d'un pixel
 
-* Déplacer un pixel blanc en X et en Y avec les deux encodeurs
-* Horizontal : bouton gauche, vertical : bouton droit
+Cette étape du projet consiste à afficher un seul et unique pixel qui se déplace en fonction des deux encodeurs.
+L'encodeur gauche déplace le pixel à l'horizontal, l'encodeur gauche déplace le pixel à la verticale.
+
+Cette étape devrait être assez simple. Il faut attribuer la valeur _blanche_ (```x"FFFFFF"```) au signal ```o_hdmi_tx_d``` quand les valeurs x et y des encodeurs sont égales à celles des compteurs du contrôleur HDMI. Dans le cas contraire, vous pourrez attribuer la valeur _noire_ (```x"000000"```).
+
+1. Modifiez le fichier ```telecran.vhd``` pour prendre en compte cette modification.
+2. Testez (il ne devrait rien avoir à simuler ici).
+3. Montrez à votre enseignant.
 
 ### Mémorisation
 
-* Partie plus complexe, comment afficher le tracé complet.
-    * Architecture framebuffer => réduire la résolution
-    * ou Scanline Rendering + fifo => ptetre un peu complexe
+Cette partie est un peu plus complexe. On veut mémoiriser les pixels parcourus pour afficher le dessin, comme sur un véritable écran magique.
+Il faudra utiliser un _framebuffer_ pour stocker les pixels déjà allumés. Le code d'une mémoire est fourni dans le fichier ```dpram.vhd```. Il s'agit d'une mémoire RAM _dual-port_.
+
+1. Expliquez ce qu'est une mémoire _dual-port_.
+2. Proposer un schéma pour mémoiriser les pixels.
+
+> Le port A de la mémoire RAM pourra être utilisé pour l'écriture des pixels en fonction des coordonnées générées par les encodeurs.
+> Le port B quant à lui pourra être utilisé pour la lecture des pixels par le controleur HDMI.
+
+3. Instanciez le composant ```dpram``` dans le fichier ```telecran.vhd``` et effectuez les connexions nécessaires.
+4. Modifiez encore une fois le signal ```o_hdmi_tx_d```.
+5. Testez.
+6. Montrez à l'enseignant.
 
 ### Effacement
 
-* L'accéléromètre est réservé aux étudiants qui ont choisi la majeure info.
-* Appuyer sur les encodeurs L **puis** R (il faut une FSM)
+Ici on veut pouvoir effacer l'écran lors de l'appui sur un bouton (par exemple sur l'encodeur gauche).
+C'est plus compliqué qu'il n'y parait : Il faut parcourir toutes les adresses de la RAM pour y écrire un zéro.
+C'est le dernier exercice, ici vous ne serez plus guidés.
+
+1. Expliquez comment résoudre le problème
+2. Résolvez le problème
+3. Montrez à l'enseignant.
 
 # Annexe
 
