@@ -1,6 +1,6 @@
 # ENSEA 2A FPGA
 
-> **Attention**, version 0, 16/06/2025, je suis preneur pour toute amélioration
+> **Attention**, version 1, 18/07/2025, je suis preneur pour toute amélioration
 
 ## Mineure : FPGA
 
