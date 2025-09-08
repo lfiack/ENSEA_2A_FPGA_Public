@@ -96,6 +96,8 @@ end architecture tb;
 ```tcl
 quit -sim
 
+vlib work
+
 vcom composant_nul.vhd
 vcom composant_nul_tb.vhd
 
@@ -229,11 +231,126 @@ Dans cet exercice, votre ALU permettra d'effectuer 8 opérations :
 4. Testez à l'aide d'un _test bench_
 
 ## Séance 2 : Circuits séquentiels
-1. Bascule D
-    * Timings
-2. Registres (séries/parallèles)
-3. Compteurs
-4. FSM
+
+### La bascule D
+
+1. Décrire en quelques mots le fonctionnement d'une bascule D.
+2. Créez un nouveau fichier ```dff.vhd```.
+3. Dans ce fichier, écrivez le code VHDL d'une bascule D simple.
+4. Écrivez son _test bench_ et simulez là.
+5. Ajoutez un signal de reset. Simulez.
+6. Ajoutez un signal d'enable. Simulez.
+
+### Registres (séries/parallèles)
+
+1. Tracez le schéma d'un registre série vers série de 4 bits.
+2. Complétez le chronogramme suivant :
+![alt text](figures/fifo1.png)
+3. Créez un fichier ```fifo.vhd```.
+4. Quels seront les signaux a mettre dans la _liste de sensiblité_ ?
+5. Écrivez le code d'un registre série vers série dont la profondeur est configurables à l'aide de ```generic```.
+
+> À partir de cette question je ne le demanderais plus, mais tout circuit séquentiel doit avoir un signal de reset.
+
+> Vous ajouterez également un signal d'enable.
+
+6. Écrivez son _test bench_ et simulez le.
+
+### Compteurs
+
+1. Tracez le schéma de principe d'un compteur générique.
+2. Tracez le chronogramme d'un compteur 2 bits.
+3. Créez un fichier ```counter.vhd```.
+4. Écrivez le code d'un compteur générique.
+
+> On oublie pas pas le reset et l'enable
+
+5. Écrivez son _test bench_ et simulez le.
+
+### FSM
+
+Voici le code d'un séquenceur :
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity fsm is
+    port (
+        i_clk : in std_logic;
+        i_rst_n : in std_logic;
+
+        i_p50 : in std_logic;
+        i_p100 : in std_logic;
+
+        o_coffee : out std_logic;
+        o_money : out std_logic
+    );
+end entity fsm;
+
+architecture rtl of fsm is
+    type state_t is (ZERO, FIFTY, HUNDRED, ONE_FIFTY, TWO_HUNDREDS);
+    signal r_state : state_t := ZERO;
+    signal s_next_state : state_t;
+begin
+    process(i_clk, i_rst_n)
+    begin
+        if (i_rst_n = '0') then
+            r_state <= ZERO;
+        elsif (rising_edge(i_clk)) then
+            r_state <= s_next_state;
+        end if;
+    end process;
+
+    process(r_state, i_p50, i_p100)
+    begin
+        case r_state is
+            when ZERO => 
+                if (i_p50 = '1') then
+                    s_next_state <= FIFTY;
+                elsif (i_p100 = '1') then
+                    s_next_state <= HUNDRED;
+                else
+                    s_next_state <= ZERO;
+                end if;
+            when FIFTY => 
+                if (i_p50 = '1') then
+                    s_next_state <= HUNDRED;
+                elsif (i_p100 = '1') then
+                    s_next_state <= ONE_FIFTY;
+                else
+                    s_next_state <= FIFTY;
+                end if;
+            when HUNDRED => 
+                if (i_p50 = '1') then
+                    s_next_state <= ONE_FIFTY;
+                elsif (i_p100 = '1') then
+                    s_next_state <= TWO_HUNDREDS;
+                else
+                    s_next_state <= HUNDRED;
+                end if;
+            when ONE_FIFTY => 
+                s_next_state <= ZERO;
+            when TWO_HUNDREDS => 
+                s_next_state <= ZERO;
+            when others => 
+                s_next_state <= ZERO;
+        end case;
+    end process;
+
+    o_coffee <= '1' when (r_state = ONE_FIFTY) or (r_state = TWO_HUNDREDS) else '0';
+    o_money <= '1' when (r_state = TWO_HUNDREDS) else '0';
+end architecture rtl;
+```
+
+1. Pourquoi ```r_state``` est initialisé et pas ```s_next_state``` ?
+2. Justifiez les signaux présents dans la liste de sensiblité des différents ```process```.
+3. Tracer le schéma d'architecture du composant.
+4. Identifiez les parties du code en lien avec le schéma tracé.
+5. Tracer le graphe d'état du séquenceur.
+6. Complétez le graphe d'états suivant.
+
+![alt text](figures/fsm1.png)
 
 ## Séance 3 : Contrôleur HDMI
 

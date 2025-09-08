@@ -1,11 +1,21 @@
 # ENSEA 2A FPGA
 
-> **Attention**, work in progress !
+## Mineure : FPGA
 
-## Travaux dirigés
+### Travaux dirigés
 
-* [Lien vers les TD](2-td/fpga_td.md)
+* [Lien vers les TD de mineure](mineure/2-td/fpga_td.md)
 
-## Travaux pratiques
+### Travaux pratiques
 
-* [Lien vers les TP](3-tp/fpga_tp.md)
+* [Lien vers les TP de mineure](mineure/3-tp/fpga_tp.md)
+
+## Majeure : FPGA Avancé
+
+### Travaux dirigés
+
+* [Lien vers les TD de majeure](majeure/2-td/fpga_adv_td.md)
+
+### Travaux pratiques
+
+* [Lien vers les TP de majeure](majeure/3-tp/fpga_adv_tp.md)
