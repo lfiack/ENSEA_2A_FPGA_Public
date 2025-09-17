@@ -228,7 +228,7 @@ Et montrez le résultat (et le code!) à votre encadrant.
 ## Petit projet : Écran magique
 
 Si vous êtes plus jeune que M. Tauvel, vous ne savez peut-être pas ce qu'est un écran magique, aussi appelé télécran.
-C'est pas grave, vous trouverez toutes les informations ici : [https://fr.wikipedia.org/wiki/Écran_magique](https://fr.wikipedia.org/wiki/Écran_magique)
+C'est pas grave, vous trouverez toutes les informations ici : [https://fr.wikipedia.org/wiki/Écran_magique](https://fr.wikipedia.org/wiki/Écran_magique).
 En gros, c'est comme un ipad, mais dans les années 60.
 
 Ce petit projet en 3 séances vous propose de concevoir une version numérique du télécran, en utilisant la sortie HDMI de la carte DE10-Nano. Le _stylet_ numérique sera toujours déplacé par deux boutons, les deux encodeurs de la carte mezzanine.
