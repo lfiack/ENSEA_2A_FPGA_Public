@@ -8,8 +8,6 @@ In the tutorial, you used Modelsim to simulate your VHDL components. To test the
 
 ### Connecting the Board
 
-Before connecting the board, remove any SD card present in its slot, at the back of the board.
-
 To operate, the board must be powered. The current supplied by the USB port is not sufficient; you need to add an external power supply.
 
 The board is programmed via the USB port named `USB BLASTER II`. It is located on the same side as the power connector and the HDMI port. The board **cannot be programmed** via the other USB ports.
