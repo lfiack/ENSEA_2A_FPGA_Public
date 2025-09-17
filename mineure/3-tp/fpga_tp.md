@@ -175,8 +175,7 @@ end architecture rtl;
 3. Tracez le schéma correspondant à ce code VHDL
 4. Comparez avec le schéma proposé par quartus :
 
-> Dans la zone de compilation, ouvrir Compile Design > Analysis & Syn-
-thesis > Netlist Viewers puis lancer ```RTL Viewer```
+> Dans la zone de compilation, ouvrir Compile Design > Analysis & Synthesis > Netlist Viewers puis lancer ```RTL Viewer```
 
 ![alt text](figures/rtl_viewer1.png)
 
