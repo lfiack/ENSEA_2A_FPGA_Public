@@ -123,9 +123,10 @@ par défaut
 > Sélectionnez le fichier ```.sof``` dans le dossier ```output_files```
 
 7. Cochez la case ```Program/Configure```
+
 ![alt text](figures/programmer2.png)
 
-8. Programmez la carte
+9. Programmez la carte
 
 > Cliquez sur ```Start```
 
