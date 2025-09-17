@@ -21,7 +21,9 @@ La carte est programmée par le port USB nommé ```USB BLASTER II```. Il se situ
 3. La première page ne sert à rien, cliquez sur ```Next```
 4. Sur la deuxième page, choisissez un nom (par exemple ```tuto_fpga```) et un chemin.
 **Attention** : Pas d’espaces ni de caractères spéciaux !
+
 ![alt text](figures/wizard1.png)
+
 5. Cliquez sur ```Next```
 6. Sur la page suivante, sélectionnez ```Empty project``` puis cliquez sur ```Next```
 7.  La page suivante permet d’ajouter des fichier. Nous n’en avons pas besoin, cliquez sur ```Next```
