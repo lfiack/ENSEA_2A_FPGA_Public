@@ -180,8 +180,7 @@ end architecture rtl;
 ![alt text](figures/rtl_viewer1.png)
 
 5. Ce n’est pas la peine de tester ce code sur la carte, la LED clignote à 50MHz : c’est trop rapide.
-6. En vous aidant du code ci-dessous, modifiez votre code pour réduire la fré
-quence :
+6. En vous aidant du code ci-dessous, modifiez votre code pour réduire la fréquence :
 
 ```vhdl
 process(i_clk, i_rst_n)
