@@ -8,8 +8,6 @@ En TD, vous avez utilisé le logiciel Modelsim pour simuler vos composants VHDL.
 
 ### Branchement de la carte
 
-Avant de brancher la carte, retirez l'éventuelle carte SD présente dans son support, à l'arrière de la carte.
-
 Pour fonctionner, la carte doit être alimentée. Le courant fourni par le port USB n'est pas suffisant, il faut ajouter une alimentation extérieure.
 
 La carte est programmée par le port USB nommé ```USB BLASTER II```. Il se situe du même côté que le connecteur d'alimentation et que le port HDMI. La carte **ne peut pas être programmée** par les autres ports USB.
