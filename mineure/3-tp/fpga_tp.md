@@ -76,7 +76,7 @@ end architecture rtl;
 
 > ```pushl``` est sur la broche ```PIN_AH27```
 
-Quartus ne peut pas conniitre ces informations, il faut donc lui préciser.
+Quartus ne peut pas connaitre ces informations, il faut donc lui préciser.
 1. Avant toute chose, il faut _synthétiser_ le projet
 
 > Double-cliquez sur ```Analysis & Synthesis```
