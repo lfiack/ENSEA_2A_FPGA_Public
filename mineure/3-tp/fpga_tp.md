@@ -8,8 +8,6 @@ En TD, vous avez utilisé le logiciel Modelsim pour simuler vos composants VHDL.
 
 ### Branchement de la carte
 
-Avant de brancher la carte, retirez l'éventuelle carte SD présente dans son support, à l'arrière de la carte.
-
 Pour fonctionner, la carte doit être alimentée. Le courant fourni par le port USB n'est pas suffisant, il faut ajouter une alimentation extérieure.
 
 La carte est programmée par le port USB nommé ```USB BLASTER II```. Il se situe du même côté que le connecteur d'alimentation et que le port HDMI. La carte **ne peut pas être programmée** par les autres ports USB.
@@ -23,7 +21,9 @@ La carte est programmée par le port USB nommé ```USB BLASTER II```. Il se situ
 3. La première page ne sert à rien, cliquez sur ```Next```
 4. Sur la deuxième page, choisissez un nom (par exemple ```tuto_fpga```) et un chemin.
 **Attention** : Pas d’espaces ni de caractères spéciaux !
+
 ![alt text](figures/wizard1.png)
+
 5. Cliquez sur ```Next```
 6. Sur la page suivante, sélectionnez ```Empty project``` puis cliquez sur ```Next```
 7.  La page suivante permet d’ajouter des fichier. Nous n’en avons pas besoin, cliquez sur ```Next```
@@ -76,7 +76,7 @@ end architecture rtl;
 
 > ```pushl``` est sur la broche ```PIN_AH27```
 
-Quartus ne peut pas conniitre ces informations, il faut donc lui préciser.
+Quartus ne peut pas connaitre ces informations, il faut donc lui préciser.
 1. Avant toute chose, il faut _synthétiser_ le projet
 
 > Double-cliquez sur ```Analysis & Synthesis```
@@ -123,9 +123,10 @@ par défaut
 > Sélectionnez le fichier ```.sof``` dans le dossier ```output_files```
 
 7. Cochez la case ```Program/Configure```
+
 ![alt text](figures/programmer2.png)
 
-8. Programmez la carte
+9. Programmez la carte
 
 > Cliquez sur ```Start```
 
@@ -174,14 +175,12 @@ end architecture rtl;
 3. Tracez le schéma correspondant à ce code VHDL
 4. Comparez avec le schéma proposé par quartus :
 
-> Dans la zone de compilation, ouvrir Compile Design > Analysis & Syn-
-thesis > Netlist Viewers puis lancer ```RTL Viewer```
+> Dans la zone de compilation, ouvrir Compile Design > Analysis & Synthesis > Netlist Viewers puis lancer ```RTL Viewer```
 
 ![alt text](figures/rtl_viewer1.png)
 
 5. Ce n’est pas la peine de tester ce code sur la carte, la LED clignote à 50MHz : c’est trop rapide.
-6. En vous aidant du code ci-dessous, modifiez votre code pour réduire la fré
-quence :
+6. En vous aidant du code ci-dessous, modifiez votre code pour réduire la fréquence :
 
 ```vhdl
 process(i_clk, i_rst_n)
@@ -229,7 +228,7 @@ Et montrez le résultat (et le code!) à votre encadrant.
 ## Petit projet : Écran magique
 
 Si vous êtes plus jeune que M. Tauvel, vous ne savez peut-être pas ce qu'est un écran magique, aussi appelé télécran.
-C'est pas grave, vous trouverez toutes les informations ici : [https://fr.wikipedia.org/wiki/Écran_magique](https://fr.wikipedia.org/wiki/Écran_magique)
+C'est pas grave, vous trouverez toutes les informations ici : [https://fr.wikipedia.org/wiki/Écran_magique](https://fr.wikipedia.org/wiki/Écran_magique).
 En gros, c'est comme un ipad, mais dans les années 60.
 
 Ce petit projet en 3 séances vous propose de concevoir une version numérique du télécran, en utilisant la sortie HDMI de la carte DE10-Nano. Le _stylet_ numérique sera toujours déplacé par deux boutons, les deux encodeurs de la carte mezzanine.
