@@ -1,5 +1,9 @@
 # TP FPGA
 
+> Sur Ubuntu, copiez le fichier suivant dans le dossier ```/etc/udev/rules.d/```
+> 
+> [51-usbblaster.rules](51-usbblaster.rules)
+
 ## TP1 : Tutoriel Quartus
 
 En TD, vous avez utilisé le logiciel Modelsim pour simuler vos composants VHDL. Pour les tester sur FPGA, vous aurez besoin du logiciel Quartus Prime. Ce TP est écrit sur la version 24.1, mais devrait se transposer facilement sur d'autres versions. Choisissez la version _Lite Edition_, seule version gratuite. 
