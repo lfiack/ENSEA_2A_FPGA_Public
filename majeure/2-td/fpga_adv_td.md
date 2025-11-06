@@ -204,6 +204,7 @@ Puis dans modelsim :
 9. Lancez les deux commandes suivantes :
 
 > do msim_setup.tcl
+
 > ld
 
 10. Ajoutez manuellement les signaux contenus dans ```pio_sim_tb/pio_sim_inst```
