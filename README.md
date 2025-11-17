@@ -36,7 +36,7 @@ English version below
 
 ### Tutorials
 
-* TODO
+* [Link to major's tutorials](majeure/2-td/fpga_adv_td_en.md)
 
 ### Labs
 
