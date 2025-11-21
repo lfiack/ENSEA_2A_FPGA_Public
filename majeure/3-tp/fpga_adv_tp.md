@@ -105,7 +105,7 @@ Cet outil vous permet de construire votre propre micro-contrôleur (wouhou !)
 
 3. La clock est déjà présente, ajoutez le processeur
 
-> Processors and Peripherals > Embedded Processors > Nios V/m Compact Microcontroller Intel FPGA IP
+> Processors and Peripherals > Embedded Processors > Nios V/m Microcontroller Intel FPGA IP
 
 4. Dans les options du processeur, activez l'option ```Enable Reset from Debug Module```
 
@@ -172,7 +172,7 @@ use nios.nios;
 3. Instanciez le soft-processeur :
 
 ```vhdl
-nios0 : entity work.nios
+nios0 : entity nios.nios
     port map (
         clk_clk                          => i_clk,
         reset_reset_n                    => i_rst_n,

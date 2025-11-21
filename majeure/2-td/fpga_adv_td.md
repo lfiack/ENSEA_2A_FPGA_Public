@@ -289,6 +289,13 @@ Dans un premier temps vous travaillerez uniquement en VHDL, avec VSCode (ou autr
 ### Démarrage
 
 1. Téléchargez le ficher suivant : [nios_td3.zip](nios_td3.zip). Dézippez-le.
+    1. L'un des fichiers contient en dur le chemin de l'installation de Quartus (ne faites jamais ça!)
+    2. Votre installation de Quartus n'est probablement pas au même endroit que la mienne, il faudra donc la mettre à jour.
+    3. Ouvrez le fichier nios_td3/testbench/mentor/msim_setup.tcl
+    4. À la ligne 116 : ```set QUARTUS_INSTALL_DIR "/opt/intelFPGA/24.1/quartus/"```
+    5. Remplacez ```"/opt/intelFPGA/24.1/quartus/"``` par le chemin d'installation de Quartus sur votre ordi.
+    6. Sous Windows, c'est probablement quelque chose du type ```"C:/intelFPGA_lite/24.1std/quartus"```
+
 2. Lancez l'outil ```niosv-shell```. C'est un terminal pas très sympatique.
 3. Dans cet outil peu commode, déplacez-vous (à l'aide de la commande ```cd```) jusqu'au dossier ```nios_td3```.
 lancez la commande RiscFree.
@@ -362,7 +369,9 @@ Vous allez plutôt utiliser le périphérique ```pio``` pour passer un bit à 1.
 8. Relancez la simulation
 
 > com
+
 > restart -f
+
 > run 2ms
 
 9. Analysez les signaux

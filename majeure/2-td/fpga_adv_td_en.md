@@ -288,6 +288,12 @@ At first you'll work only in VHDL with VSCode (or another editor) and `Modelsim`
 ### Startup
 
 1. Download the following file: [nios_td3.zip](nios_td3.zip). Unzip it.
+    1. One of the files contains an absolute path to the install of Quartus (please don't do that!)
+    2. Your Quartus install is probably not on the same path as mine, you'll have to modify it
+    3. Open the file nios_td3/testbench/mentor/msim_setup.tcl
+    4. At line 116 : ```set QUARTUS_INSTALL_DIR "/opt/intelFPGA/24.1/quartus/"```
+    5. Replace ```"/opt/intelFPGA/24.1/quartus/"``` by the path of your Quartus install folder.
+    6. On Windows, it's probably something like ```"C:/intelFPGA_lite/24.1std/quartus"```
 2. Start `niosv-shell`.
 3. In that terminal, `cd` to the `nios_td3` folder and run `RiscFree`.
 4. A window asks for a workspace folder. Choose the `soft` folder inside the freshly unzipped `nios_td3`.
