@@ -182,7 +182,7 @@ nios0 : entity nios.nios
 
 > Les noms des signaux peuvent être copié-collés depuis le fichier ```sopc/nios/nios_inst.vhd```
 
-4. Compilez le projet, programmez la carte, comme d'habitude.
+4. Compilez le projet, programmez la carte, comme d'habitude. Si vous ne trouver pas le fichier pour flasher votre FPGA, il est possible qu'il manque des fichiers de licence, veuillez suivre [le tutoriel](https://github.com/lfiack/ENSEA_2A_FPGA_Public/blob/main/majeure/3-tp/get_licence.md) pour créer et importer votre licence.
 
 ### Création du projet soft
 
