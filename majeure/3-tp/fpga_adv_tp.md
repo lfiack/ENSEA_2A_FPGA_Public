@@ -353,6 +353,9 @@ io_i2c_scl <= '0' when s_i2c_scl_oe = '1' else 'Z';
 
 s_i2c_sda_in <= io_i2c_sda;
 io_i2c_sda <= '0' when s_i2c_sda_oe = '1' else 'Z';
+
+o_i2c_ncs <= '1';
+o_i2c_sdo <= '0';
 ```
 
 Dans le programme ```C``` :
