@@ -18,6 +18,30 @@ La dernière version disponible sans licence est ```20.1.1``` disponible à cett
 L’éditeur de Modelsim (ainsi que celui de Quartus Prime, que nous utiliserons en TP) est nul. 
 Vous pouvez installer autre chose, comme VSCode. Dans ce cas, installez aussi une extension pour le vhdl.
 
+Installer sur Ubuntu : 
+```bash
+
+sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt install build-essential libx11-6:i386 libxext6:i386 libxft2:i386 libxext6 libxft2 libx11-dev libxext-dev libxft-dev libncurses5:i386 libncurses5 libncurses-dev
+
+echo 'export PATH="~/intelFPGA/20.1/modelsim_ase/bin/"' >> ~/.bashrc
+source ~/.bashrc
+
+# Modifie "~/intelFPGA/20.1/modelsim_ase/bin/" en fonction de l'endroit où tu as installé modelsim.
+
+# Tu devrais pouvoir lancer modelsim en ouvrant un terminal et en tapant la commande suivante :
+vsim
+
+# Si tu n'as pas encore installé modelsim :
+
+wget https://downloads.intel.com/akdlm/software/acdsinst/20.1std.1/720/ib_installers/ModelSimSetup-20.1.1.720-linux.run
+chmod +x ModelSimSetup-20.1.1.720-linux.run
+./ModelSimSetup-20.1.1.720-linux.run
+```
+
+https://gist.github.com/robodhruv/e2c0945cc78006b00d4206846bdb7657
+
 #### Création d'un premier composant
 
 1. Créez un nouveau dossier ```1-tuto_modelsim```
