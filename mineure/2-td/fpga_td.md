@@ -40,7 +40,7 @@ chmod +x ModelSimSetup-20.1.1.720-linux.run
 ./ModelSimSetup-20.1.1.720-linux.run
 ```
 
-https://gist.github.com/robodhruv/e2c0945cc78006b00d4206846bdb7657
+Plus d'info ici : https://gist.github.com/robodhruv/e2c0945cc78006b00d4206846bdb7657
 
 #### Création d'un premier composant
 
