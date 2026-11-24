@@ -115,7 +115,7 @@ Cet outil vous permet de construire votre propre micro-contrôleur (wouhou !)
 
 6. Ajoutez le module jtag uart.
 
-> Interface Protocols > JTAG UART Intel FPGA IP
+> Interface Protocols > Serial > JTAG UART Intel FPGA IP
 
 7. Ajoutez un PIO. Configurez ```Width``` à ```10```
 
@@ -141,20 +141,24 @@ Cet outil vous permet de construire votre propre micro-contrôleur (wouhou !)
 
 ![data_manager](figures/data_manager.png)
 
-13. Générez les adresses.
+13. Connecter le signal `irq` du JTAG UART au signal `platform_irq_rx` du processeur.
+
+![irq](figures/irq.png)
+
+14. Générez les adresses.
 
 > System > Assign Base Addresses
 
-14. Configurez le vecteur de reset :
+15. Configurez le vecteur de reset :
 
 > Double-cliquez sur le processeur ```intel_niosv_m_0```
 > Dans la section ```Traps, Exceptions and Interrupts```, configurez ```Reset Agent``` sur ```on_chip_memory2_0.s1```
 
 ![rest_agent](figures/reset_agent.png)
 
-15. Sauvegardez.
+16. Sauvegardez.
 
-16. Générez le code HDL et fermez Platform Designer.
+17. Générez le code HDL et fermez Platform Designer.
 
 > Cliquez sur Generate HDL. Choisissez VHDL au lieu de Verilog. Laisser le reste des paramètres par défault.
 
